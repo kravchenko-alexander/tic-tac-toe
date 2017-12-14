@@ -4,6 +4,11 @@ require 'contracts'
 class Board
   include Contracts::Core
   include Contracts::Builtin
+  include Contracts::Invariants
+
+  attr_reader :board
+
+  invariant(:board) { board.nil? || board.is_a?(Array) && board.size == 3 }
 
   def initialize
     @board = Array.new(3) { Array.new(3) }
